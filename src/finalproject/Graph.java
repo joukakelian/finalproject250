@@ -2,37 +2,57 @@ package finalproject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap; // CUSTOM IMPORTED
 
 import finalproject.system.Tile;
 import finalproject.system.TileType;
 import finalproject.tiles.*;
 
 public class Graph {
-	// TODO level 2: Add fields that can help you implement this data type
-
-    // TODO level 2: initialize and assign all variables inside the constructor
+    private ArrayList<Edge> edgeList = new ArrayList<>();
+    private ArrayList<Tile> verticesList = new ArrayList<>();
+    
 	public Graph(ArrayList<Tile> vertices) {
-		
+	    this.verticesList = vertices;
 	}
 	
-    // TODO level 2: add an edge to the graph
     public void addEdge(Tile origin, Tile destination, double weight){
-    	
+        Edge e = new Edge(origin, destination, weight);
+        edgeList.add(e);
+        origin.addNeighbor(destination);
     }
     
-    // TODO level 2: return a list of all edges in the graph
 	public ArrayList<Edge> getAllEdges() {
-		return null;
+		return edgeList;
 	}
   
-	// TODO level 2: return list of tiles adjacent to t
 	public ArrayList<Tile> getNeighbors(Tile t) {
-    	return null;
+        ArrayList<Tile> tNeighbors = new ArrayList<>();
+        for (var vertex : verticesList) {
+            if (vertex == t) {
+                for (var neigh : t.neighbors) {
+                    if (neigh.isWalkable()) {
+                        tNeighbors.add(neigh);
+                    }
+                }
+            }
+        }
+    	return tNeighbors;
     }
 	
 	// TODO level 2: return total cost for the input path
 	public double computePathCost(ArrayList<Tile> path) {
-		return 0.0;
+        double pathCost = 0.0;
+		for (int i = 1; i < path.size()-1; i++) {
+            for (int j = 0; j < edgeList.size()-1; j++) {
+                Tile src = path.get(i-1);
+                Tile dest = path.get(i);
+                if (edgeList.get(j).getStart() == src && edgeList.get(j).getEnd() == dest) {
+                    pathCost += edgeList.get(j).weight;
+                }
+            }
+        }
+        return pathCost;
 	}
 	
    
@@ -41,22 +61,50 @@ public class Graph {
     	Tile destination;
     	double weight;
 
-        // TODO level 2: initialize appropriate fields
         public Edge(Tile s, Tile d, double cost){
-        	
+        	this.origin = s;
+            this.destination = d;
+            this.weight = cost;
         }
         
-        // TODO level 2: getter function 1
         public Tile getStart(){
-            return null;
+            return this.origin;
         }
-
         
-        // TODO level 2: getter function 2
         public Tile getEnd() {
-            return null;
+            return this.destination;
         }
         
+    }
+    
+    public static void main(String[] args) {
+        Tile vertex1 = new DesertTile();
+        Tile vertex2 = new DesertTile();
+        Tile vertex3 = new PlainTile();
+        Tile vertex4 = new PlainTile();
+    
+        ArrayList<Tile> vertices = new ArrayList<>();
+        vertices.add(vertex1);
+        vertices.add(vertex2);
+        vertices.add(vertex3);
+        vertices.add(vertex4);
+    
+    
+    
+        Graph weightedGraph = new Graph(vertices);
+    
+        weightedGraph.addEdge(vertex1,vertex2,5);
+        weightedGraph.addEdge(vertex2,vertex3,5);
+        weightedGraph.addEdge(vertex3,vertex4,5);
+        weightedGraph.addEdge(vertex4,vertex1,5);
+    
+    
+        System.out.print("Path length from tile 1 to tile 4:");
+        System.out.println(weightedGraph.computePathCost(vertices));
+    
+        for(Edge edge: weightedGraph.getAllEdges())
+            System.out.println("Edge linking: " + edge.origin +" and " + edge.destination
+                    + " with weight "+ edge.weight);
     }
     
 }

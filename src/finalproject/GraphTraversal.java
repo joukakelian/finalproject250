@@ -31,9 +31,8 @@ public class GraphTraversal {
 				for (var tile : cur.neighbors) {
 					if (!visited.contains(tile) && tile.isWalkable()) {
 						visited.add(tile);
-						toVisit.add(tile); // push
+						toVisit.add(tile);
 					}
-					
 				}
 			}
 		}
