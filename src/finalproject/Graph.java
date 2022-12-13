@@ -10,7 +10,7 @@ import finalproject.tiles.*;
 
 public class Graph {
     private ArrayList<Edge> edgeList = new ArrayList<>();
-    private ArrayList<Tile> verticesList = new ArrayList<>();
+    public ArrayList<Tile> verticesList;
     
     public Graph(ArrayList<Tile> vertices) {
         this.verticesList = vertices;
@@ -54,7 +54,6 @@ public class Graph {
         }
         return pathCost;
     }
-    
     
     public static class Edge {
         Tile origin;

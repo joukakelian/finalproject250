@@ -512,7 +512,11 @@ public class MiniTester {
     public static boolean testSPathGenerateGraph1() { // 2 points
         buildWorld(smMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
+        System.out.println(shortest.g);
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
+        for (var edge : edges) {
+            System.out.println(edge);
+        }
         if (edges.size() != 8) {
             System.out.println("There should be 8 edges.");
             return false;
@@ -532,7 +536,11 @@ public class MiniTester {
         buildWorld(lgMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
+        for (var edge : edges) {
+            System.out.println(edge);
+        }
         if (edges.size() != 40) {
+            System.out.println("size of shortest edges is " + edges.size());
             System.out.println("There should be 40 edges. Note that MountainTile is not reachable.");
             return false;
         }

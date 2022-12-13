@@ -9,7 +9,6 @@ import java.util.LinkedList;
 public class GraphTraversal {
 
 	// input Tile start, traverse map find all reachable tiles, return ArrayList w Tiles in order of visitation
-	//TODO level 1: implement BFS traversal starting from s
 	public static ArrayList<Tile> BFS(Tile s) {
 		HashSet<Tile> visitedMap = new HashSet<>();
 		ArrayList<Tile> toVisit = new ArrayList<>();
