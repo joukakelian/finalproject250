@@ -31,9 +31,9 @@ public class Graph {
         ArrayList<Tile> tNeighbors = new ArrayList<>();
         for (var vertex : verticesList) {
             if (vertex == t) {
-                for (var neigh : t.neighbors) {
-                    if (neigh.isWalkable()) {
-                        tNeighbors.add(neigh);
+                for (var edge : getAllEdges()) {
+                    if (edge.getStart() == t) {
+                        tNeighbors.add(edge.getEnd());
                     }
                 }
             }
@@ -41,7 +41,6 @@ public class Graph {
         return tNeighbors;
     }
     
-    // TODO level 2: return total cost for the input path
     public double computePathCost(ArrayList<Tile> path) {
         double pathCost = 0.0;
         for (int i = 1; i < path.size(); i++) {
