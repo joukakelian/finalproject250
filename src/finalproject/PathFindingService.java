@@ -18,55 +18,53 @@ public abstract class PathFindingService {
     
     // finding shortest path to a tile's destination field
     public ArrayList<Tile> findPath(Tile startNode) {
-        // make queue of all graph's vertices
+        ArrayList<Tile> visited = new ArrayList<>();
         TilePriorityQ queue = new TilePriorityQ(g.verticesList);
-        // set cost to inf on all vertices, set pred to null
-        for (var vertex : g.verticesList) {
-            vertex.costEstimate = Integer.MAX_VALUE;
-            vertex.predecessor = null;
-        }
-        // set startNode cost est to 0
+        
         startNode.costEstimate = 0;
-        System.out.println(queue.size <= 0);
-        while (queue.size > 0) {
-            
+        for (var tile: queue.heap) {
+            if (tile != startNode) tile.costEstimate = Integer.MAX_VALUE;
+            tile.predecessor = null;
+        }
+        
+        System.out.println("*");
+        while (!queue.isEmpty()) {
+            System.out.println("size is " + queue.size);
             Tile min = queue.removeMin();
-            System.out.println("min: " + min);
-            for (var n : min.neighbors) {
-                ArrayList<Tile> arr = new ArrayList<>();
-                arr.add(min);
-                arr.add(n);
-                double temp = min.costEstimate + g.computePathCost(arr);
-                if (temp < n.costEstimate) {
-                    n.costEstimate = temp;
+            visited.add(min);
+            for (var n : g.getNeighbors(min)) {
+                ArrayList<Tile> path = new ArrayList<>();
+                path.add(min);
+                path.add(n);
+                g.computePathCost(path);
+                if (g.computePathCost(path) < n.costEstimate) {
+                    n.costEstimate = min.costEstimate + g.computePathCost(path);
                     n.predecessor = min;
                 }
             }
         }
-        
-        ArrayList<Tile> path = new ArrayList<>();
-        
-        Tile node = g.verticesList.get(0);
-        int i = 0;
-        while (!node.isDestination && i < g.verticesList.size()) {
-            node = g.verticesList.get(i);
-            i++;
+        System.out.println("**");
+        Tile dest = null;
+        for (var tile : visited) {
+            if (tile.isDestination) {
+                dest = tile;
+            }
         }
-        // now node id destination
-        Tile pred = node.predecessor;
-        while (pred != null) {
-            path.add(path.size(), pred);
-            pred = pred.predecessor;
-        }
-        path.add(startNode);
-        // while queue is not empty
-            // remove min tile
-            // loop through all neighbors and relax edges linking from minTile towards its neighbor
-            // downheap
-        // break once reach isDestination
-        // backtrack
+        System.out.println("***");
+        ArrayList<Tile> findPath = new ArrayList<>();
         
-    	return path;
+        // infinite loop
+        // A <-> B
+        while (dest != startNode) {
+            //System.out.println(dest);
+            findPath.add(0, dest);
+            
+            dest = dest.predecessor;
+            
+        }
+        findPath.add(0, startNode);
+        System.out.println("****");
+        return findPath;
     }
     
     //TODO level 5: Implement basic dijkstra's algorithm to path find to a known destination

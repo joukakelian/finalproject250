@@ -50,7 +50,11 @@ public class MiniTester {
         };
         
         String[] names = new String[]{
-                "testTile1", "testTile2", "testBFS1", "testDFS1", "testBFS2", "testDFS2", "testEdges", "testNeighbors1", "testNeighbors2", "testPathCost", "testRemoveMin", "testUpdateKeys", "testSPathGenerateGraph1", "testSPathGenerateGraph2", "testFindPath1Arg1", "testFindPath1Arg2", "testFindPath2Args", "testFindPath3Args", "testFPathGenerateGraph1", "testFPathGenerateGraph2", "testSPathGenerateGraphWithMetro", "testFPathGenerateGraphWithMetro", "testSSPathGenerateGraph", "testSafeFindPath1", "testSafeFindPath2", "testSafeFindPath3", "testSafeFindPath4"
+                "testTile1", "testTile2", "testBFS1", "testDFS1", "testBFS2", "testDFS2", "testEdges", "testNeighbors1",
+                "testNeighbors2", "testPathCost", "testRemoveMin", "testUpdateKeys", "testSPathGenerateGraph1",
+                "testSPathGenerateGraph2", "testFindPath1Arg1", "testFindPath1Arg2", "testFindPath2Args", "testFindPath3Args",
+                "testFPathGenerateGraph1", "testFPathGenerateGraph2", "testSPathGenerateGraphWithMetro", "testFPathGenerateGraphWithMetro",
+                "testSSPathGenerateGraph", "testSafeFindPath1", "testSafeFindPath2", "testSafeFindPath3", "testSafeFindPath4"
         };
         
         for (int i = 0; i < tests.length; i++) {
@@ -559,6 +563,10 @@ public class MiniTester {
         buildWorld(smMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Tile> path = shortest.findPath(world.get(0));
+        System.out.println("start is " + world.get(0));
+        for (var p : path) {
+            System.out.println(p);
+        }
         if (path.size() != 3) {
             System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 3.");

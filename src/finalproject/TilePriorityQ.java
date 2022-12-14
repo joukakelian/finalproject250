@@ -16,6 +16,9 @@ public class TilePriorityQ {
 			downheap(size);
 		}
 	}
+	public boolean isEmpty() {
+		return (this.size <= 0);
+	}
 	private static int parentIndex(int i) {
 		return (i-1)/2;
 	}
@@ -56,7 +59,7 @@ public class TilePriorityQ {
 	}
 	public Tile removeMin() {
 		Tile result = heap.get(0);
-		heap.set(0, heap.get(size));
+		heap.set(0, heap.get(this.size));
 		size--;
 		upheap(0);
 		return result;
