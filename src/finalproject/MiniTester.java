@@ -560,10 +560,12 @@ public class MiniTester {
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Tile> path = shortest.findPath(world.get(0));
         if (path.size() != 3) {
+            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 3.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 2) {
+            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 2.");
             return false;
         }
@@ -581,6 +583,7 @@ public class MiniTester {
          * f f d p
          */
         if (path.size() != 6) {
+            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 6.");
             return false;
         }
@@ -595,6 +598,7 @@ public class MiniTester {
             }
         
         if (shortest.g.computePathCost(path) != 8) {
+            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 8.");
             return false;
         }
@@ -613,10 +617,12 @@ public class MiniTester {
          *   f M e
          */
         if (path.size() != 7) {
+            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 6) {
+            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 6.");
             return false;
         }
@@ -637,10 +643,12 @@ public class MiniTester {
          *     M e
          */
         if (path.size() != 7) {
+            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 7) {
+            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 7.");
             return false;
         }

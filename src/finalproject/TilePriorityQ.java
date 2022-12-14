@@ -7,8 +7,8 @@ import java.util.Arrays;
 import finalproject.system.Tile;
 
 public class TilePriorityQ {
-	static ArrayList<Tile> heap = new ArrayList<>();
-	static int size = -1;
+	public static ArrayList<Tile> heap = new ArrayList<>();
+	public static int size = -1;
 	public TilePriorityQ (ArrayList<Tile> vertices) {
 		for (var vertex : vertices) {
 			size++;
@@ -16,7 +16,6 @@ public class TilePriorityQ {
 			downheap(size);
 		}
 	}
-	
 	private static int parentIndex(int i) {
 		return (i-1)/2;
 	}
@@ -27,7 +26,7 @@ public class TilePriorityQ {
 		return ((2*i)+2);
 	}
 	
-	private void downheap(int index) {
+	public void downheap(int index) {
 		while (index > 0 && heap.get(parentIndex(index)).costEstimate > heap.get(index).costEstimate) {
 			swap(parentIndex(index),index);
 			index = parentIndex(index);
