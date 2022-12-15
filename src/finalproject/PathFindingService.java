@@ -27,44 +27,48 @@ public abstract class PathFindingService {
             tile.predecessor = null;
         }
         
+        Tile dest = null;
         System.out.println("*");
         while (!queue.isEmpty()) {
             System.out.println("size is " + queue.size);
             Tile min = queue.removeMin();
+            System.out.println("min: " + min);
+            System.out.println("min.costEstimate: " + min.costEstimate);
+            if (min.isDestination) {
+                dest = min;
+                System.out.println("###############################################");
+                System.out.println("destination!!! " + dest);
+                System.out.println("###############################################");
+            }
             visited.add(min);
-            for (var n : g.getNeighbors(min)) {
-                ArrayList<Tile> path = new ArrayList<>();
-                path.add(min);
-                path.add(n);
-                g.computePathCost(path);
-                if (g.computePathCost(path) < n.costEstimate) {
-                    n.costEstimate = min.costEstimate + g.computePathCost(path);
-                    n.predecessor = min;
+            for (var n : min.neighbors) {
+                if (queue.heap.contains(n)) {
+                    ArrayList<Tile> path = new ArrayList<>();
+                    path.add(min);
+                    path.add(n);
+                    g.computePathCost(path);
+                    if (min.costEstimate + g.computePathCost(path) < n.costEstimate) {
+                        n.costEstimate = min.costEstimate + g.computePathCost(path);
+                        n.predecessor = min;
+                        System.out.println("n: " + n);
+                    }
                 }
+                
             }
         }
-        System.out.println("**");
-        Tile dest = null;
-        for (var tile : visited) {
-            if (tile.isDestination) {
-                dest = tile;
-            }
-        }
-        System.out.println("***");
-        ArrayList<Tile> findPath = new ArrayList<>();
         
-        // infinite loop
-        // A <-> B
-        while (dest != startNode) {
-            //System.out.println(dest);
-            findPath.add(0, dest);
-            
+        System.out.println("**");
+        
+        ArrayList<Tile> pathArr = new ArrayList<>();
+        while (dest != startNode && dest != null) {
+            pathArr.add(0, dest);
+            System.out.println("dest: " + dest);
             dest = dest.predecessor;
-            
         }
-        findPath.add(0, startNode);
-        System.out.println("****");
-        return findPath;
+    
+        pathArr.add(0, startNode);
+        System.out.println("***");
+        return pathArr;
     }
     
     //TODO level 5: Implement basic dijkstra's algorithm to path find to a known destination
