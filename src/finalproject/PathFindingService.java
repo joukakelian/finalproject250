@@ -34,7 +34,7 @@ public abstract class PathFindingService {
             Tile min = queue.removeMin();
             System.out.println("min: " + min);
             System.out.println("min.costEstimate: " + min.costEstimate);
-            if (min.isDestination) {
+            if ((queue.size == 0 && dest == null) || min.isDestination) {
                 dest = min;
                 System.out.println("###############################################");
                 System.out.println("destination!!! " + dest);

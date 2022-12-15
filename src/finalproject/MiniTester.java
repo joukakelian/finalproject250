@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.function.Supplier;
 
 import finalproject.tiles.PlainTile;
 import finalproject.tiles.DesertTile;
@@ -15,61 +14,132 @@ import finalproject.tiles.MountainTile;
 import finalproject.tiles.FacilityTile;
 import finalproject.tiles.MetroTile;
 import finalproject.tiles.ZombieInfectedRuinTile;
+import finalproject.TilePriorityQ;
+import finalproject.GraphTraversal;
 
 public class MiniTester {
     
     public static void main(String[] args) {
-        Supplier[] tests = new Supplier[]{
-                MiniTester::testTile1,
-                MiniTester::testTile2,
-                MiniTester::testBFS1,
-                MiniTester::testDFS1,
-                MiniTester::testBFS2,
-                MiniTester::testDFS2,
-                MiniTester::testEdges,
-                MiniTester::testNeighbors1,
-                MiniTester::testNeighbors2,
-                MiniTester::testPathCost,
-                MiniTester::testRemoveMin,
-                MiniTester::testUpdateKeys,
-                MiniTester::testSPathGenerateGraph1,
-                MiniTester::testSPathGenerateGraph2,
-                MiniTester::testFindPath1Arg1,
-                MiniTester::testFindPath1Arg2,
-                MiniTester::testFindPath2Args,
-                MiniTester::testFindPath3Args,
-                MiniTester::testFPathGenerateGraph1,
-                MiniTester::testFPathGenerateGraph2,
-                MiniTester::testSPathGenerateGraphWithMetro,
-                MiniTester::testFPathGenerateGraphWithMetro,
-                MiniTester::testSSPathGenerateGraph,
-                MiniTester::testSafeFindPath1,
-                MiniTester::testSafeFindPath2,
-                MiniTester::testSafeFindPath3,
-                MiniTester::testSafeFindPath4,
-        };
-        
-        String[] names = new String[]{
-                "testTile1", "testTile2", "testBFS1", "testDFS1", "testBFS2", "testDFS2", "testEdges", "testNeighbors1",
-                "testNeighbors2", "testPathCost", "testRemoveMin", "testUpdateKeys", "testSPathGenerateGraph1",
-                "testSPathGenerateGraph2", "testFindPath1Arg1", "testFindPath1Arg2", "testFindPath2Args", "testFindPath3Args",
-                "testFPathGenerateGraph1", "testFPathGenerateGraph2", "testSPathGenerateGraphWithMetro", "testFPathGenerateGraphWithMetro",
-                "testSSPathGenerateGraph", "testSafeFindPath1", "testSafeFindPath2", "testSafeFindPath3", "testSafeFindPath4"
-        };
-        
-        for (int i = 0; i < tests.length; i++) {
-            Supplier t = tests[i];
-            String name = names[i];
-            System.out.println("===================" + name + "===================");
+        // TODO Auto-generated method stub
+        String[] tests= {
+                "testTile1",
+                "testTile2",
+                "testBFS1",
+                "testBFS2",
+                "testDFS1",
+                "testDFS2",
+                "testEdges",
+                "testNeighbors1",
+                "testNeighbors2",
+                "testPathCost",
+                "testRemoveMin",
+                "testUpdateKeys",
+                "testSPathGenerateGraph1",
+                "testSPathGenerateGraph2",
+                "testFindPath1Arg1",
+                "testFindPath1Arg2",
+                "testFindPath2Args",
+                "testFindPath3Args",
+                "testFPathGenerateGraph1",
+                "testFPathGenerateGraph2",
+                "testSPathGenerateGraphWithMetro",
+                "testFPathGenerateGraphWithMetro",
+                "testSSPathGenerateGraph",
+                "testSafeFindPath1",
+                "testSafeFindPath2",
+                "testSafeFindPath3",
+                "testSafeFindPath4"
             
-            boolean result = (boolean) t.get();
-            if (result) {
-                System.out.println("Passed!");
+            
+            
+            
+            
+            
+            
+        };
+        args = new String[1];
+        for(int index=0; index<tests.length;index++)
+        {
+            System.out.println(tests[index]);
+            args[0]=tests[index];
+            String testName = args[0];
+            boolean pass = false;
+            if (testName.equals("testTile1")) {
+                pass = testTile1();
+            } else if (testName.equals("testTile2")) {
+                pass = testTile2();
+            } else if (testName.equals("testBFS1")) {
+                pass = testBFS1();
+            } else if (testName.equals("testDFS1")) {
+                pass = testDFS1();
+            } else if (testName.equals("testBFS2")) {
+                pass = testBFS2();
+            } else if (testName.equals("testDFS2")) {
+                pass = testDFS2();
+            } else if (testName.equals("testEdges")) {
+                pass = testEdges();
+            } else if (testName.equals("testNeighbors1")) {
+                pass = testNeighbors1();
+            } else if (testName.equals("testNeighbors2")) {
+                pass = testNeighbors2();
+            } else if (testName.equals("testPathCost")) {
+                pass = testPathCost();
+            } else if (testName.equals("testRemoveMin")) {
+                pass = testRemoveMin();
+            } else if (testName.equals("testUpdateKeys")) {
+                pass = testUpdateKeys();
+            } else if (testName.equals("testSPathGenerateGraph1")) {
+                pass = testSPathGenerateGraph1();
+                break;
+            } else if (testName.equals("testSPathGenerateGraph2")) {
+                pass = testSPathGenerateGraph2();
+            } else if (testName.equals("testFindPath1Arg1")) {
+                pass = testFindPath1Arg1();
+            } else if (testName.equals("testFindPath1Arg2")) {
+                pass = testFindPath1Arg2();
+            } else if (testName.equals("testFindPath2Args")) {
+                pass = testFindPath2Args();
+            } else if (testName.equals("testFindPath3Args")) {
+                pass = testFindPath3Args();
+            } else if (testName.equals("testFPathGenerateGraph1")) {
+                pass = testFPathGenerateGraph1();
+            } else if (testName.equals("testFPathGenerateGraph2")) {
+                pass = testFPathGenerateGraph2();
+            } else if (testName.equals("testSPathGenerateGraphWithMetro")) {
+                pass = testSPathGenerateGraphWithMetro();
+            } else if (testName.equals("testFPathGenerateGraphWithMetro")) {
+                pass = testFPathGenerateGraphWithMetro();
+            } else if (testName.equals("testSSPathGenerateGraph")) {
+                pass = testSSPathGenerateGraph();
+            } else if (testName.equals("testSafeFindPath1")) {
+                pass = testSafeFindPath1();
+            } else if (testName.equals("testSafeFindPath2")) {
+                pass = testSafeFindPath2();
+            } else if (testName.equals("testSafeFindPath3")) {
+                pass = testSafeFindPath3();
+            } else if (testName.equals("testSafeFindPath4")) {
+                pass = testSafeFindPath4();
             } else {
-                System.out.println("Failed!");
+                System.out.println("Unknown test " + testName + ".");
             }
+            
+            if (pass) {
+                System.out.println("pass");
+                //System.exit(0);
+            } else {
+                System.out.println("fail");
+                //System.exit(1);
+            }
+            System.out.println("\n-----------------\n");
         }
-        System.out.println("==================================================");
+        /*
+        if (args.length != 1) {
+            System.out.println("Need one argument.");
+            System.exit(1);
+        }
+
+         */
+        
         
     }
     
@@ -355,7 +425,6 @@ public class MiniTester {
     public static boolean testNeighbors2() { // 1 points
         buildGraph();
         ArrayList<Tile> neighbors = graph.getNeighbors(tiles.get(3));
-        for (var tile : neighbors) System.out.println(tile);
         if (neighbors.size() != 1) {
             System.out.println("Tile 3 should have 1 neighbor");
             return false;
@@ -388,13 +457,23 @@ public class MiniTester {
             tiles.add(t);
         }
         Arrays.sort(a);
+        
         TilePriorityQ q = new TilePriorityQ(tiles);
+        for (var t : q.heap) {
+            System.out.print(t.costEstimate + " ");
+        }
+        System.out.println("===========");
         for (int i = 0; i < a.length; ++i) {
+            for (var t : q.heap) {
+                System.out.print(t.costEstimate + " ");
+            }
+            System.out.println("\n=== removing ===");
+            System.out.println("size is " + q.size);
             Tile t = q.removeMin();
+            System.out.println(t.costEstimate);
             if (t.costEstimate != a[i])
                 return false;
         }
-        
         return true;
     }
     
@@ -407,6 +486,7 @@ public class MiniTester {
             t.costEstimate = a[i];
             tiles.add(t);
         }
+        Arrays.sort(a);
         TilePriorityQ q = new TilePriorityQ(tiles);
         Tile t0 = new TestTile();
         t0.costEstimate = 0.5;
@@ -414,6 +494,7 @@ public class MiniTester {
             Tile t1 = tiles.get(b[i]);
             q.updateKeys(t1, t0, 1);
             Tile t2 = q.removeMin();
+            System.out.println("expected: " + t1.costEstimate + ", got: " + t2.costEstimate);
             if (t2 != t1 || t2.costEstimate != 1)
                 return false;
         }
@@ -516,11 +597,7 @@ public class MiniTester {
     public static boolean testSPathGenerateGraph1() { // 2 points
         buildWorld(smMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
-        System.out.println(shortest.g);
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
-        for (var edge : edges) {
-            System.out.println(edge);
-        }
         if (edges.size() != 8) {
             System.out.println("There should be 8 edges.");
             return false;
@@ -540,11 +617,7 @@ public class MiniTester {
         buildWorld(lgMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
-        for (var edge : edges) {
-            System.out.println(edge);
-        }
         if (edges.size() != 40) {
-            System.out.println("size of shortest edges is " + edges.size());
             System.out.println("There should be 40 edges. Note that MountainTile is not reachable.");
             return false;
         }
@@ -563,17 +636,11 @@ public class MiniTester {
         buildWorld(smMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Tile> path = shortest.findPath(world.get(0));
-        System.out.println("start is " + world.get(0));
-        for (var p : path) {
-            System.out.println(p);
-        }
         if (path.size() != 3) {
-            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 3.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 2) {
-            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 2.");
             return false;
         }
@@ -590,8 +657,8 @@ public class MiniTester {
          * f
          * f f d p
          */
+        System.out.println(path.size());
         if (path.size() != 6) {
-            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 6.");
             return false;
         }
@@ -606,7 +673,6 @@ public class MiniTester {
             }
         
         if (shortest.g.computePathCost(path) != 8) {
-            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 8.");
             return false;
         }
@@ -625,12 +691,10 @@ public class MiniTester {
          *   f M e
          */
         if (path.size() != 7) {
-            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 6) {
-            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 6.");
             return false;
         }
@@ -651,12 +715,10 @@ public class MiniTester {
          *     M e
          */
         if (path.size() != 7) {
-            System.out.println("Your path size is " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.g.computePathCost(path) != 7) {
-            System.out.println("Your cost: " + shortest.g.computePathCost(path));
             System.out.println("Path cost should be 7.");
             return false;
         }
