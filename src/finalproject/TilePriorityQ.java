@@ -14,8 +14,9 @@ public class TilePriorityQ {
 		for (var vertex : vertices) {
 			size++;
 			heap.add(vertex);
-			minHeapify(0);
+			upheap(size);
 		}
+		downheap(0);
 	}
 	
 	public boolean isEmpty() {
@@ -35,15 +36,23 @@ public class TilePriorityQ {
 	}
 	
 	private boolean isLeaf(int i) {
-		if (rightIndex(i) >= size || leftIndex(i) >= size) {
+		if (rightIndex(i) >= size && leftIndex(i) >= size) {
 			return true;
 		}
 		return false;
 	}
 	public void downheap(int index) {
-		while (index > 0 && heap.get(parentIndex(index)).costEstimate > heap.get(index).costEstimate) {
-			swap(parentIndex(index), index);
-			index = parentIndex(index);
+		while (leftIndex(index) < size) { // if there is left
+			if (rightIndex(index) < size) { // if there is right
+				if (heap.get(rightIndex(index)).costEstimate < heap.get(leftIndex(index)).costEstimate) {
+					swap(rightIndex(index), leftIndex(index));
+				}
+			}
+			
+			if (heap.get(index).costEstimate < heap.get(parentIndex(index)).costEstimate) {
+				upheap(index);
+			}
+			else break;
 		}
 	}
 	
@@ -56,10 +65,8 @@ public class TilePriorityQ {
 		
 	}
 	
-	private void swap(int i, int j) {
-		Tile temp = heap.get(i);
-		heap.set(i, heap.get(j));
-		heap.set(j, temp);
+	private void swap(Tile parent) {
+		Tile left = swap()
 	}
 	private void minHeapify(int i) {
 		// If the node is a non-leaf node and any of its children are smaller
@@ -77,16 +84,18 @@ public class TilePriorityQ {
 			}
 			else if (heap.get(leftIndex(i)).costEstimate < heap.get(rightIndex(i)).costEstimate) {
 				swap(rightIndex(i), leftIndex(i));
+				minHeapify(rightIndex(i));
 			}
 		}
 	}
 	public Tile removeMin() {
-		Tile popped = heap.get(0);
-		heap.remove(popped);
-		size--;
-		minHeapify(0);
+		Tile min = heap.get(0);
+		heap.remove(min);
 		
-		return popped;
+		size--;
+		downheap(0);
+		
+		return min;
 	}
 	
 	public void updateKeys(Tile t, Tile newPred, double newEstimate) {

@@ -28,7 +28,7 @@ public class MiniTester {
         // run all tests if no arguments
         boolean pass = true;
         int total = 0, passed = 0;
-        
+        /*
         if (testName.isEmpty() || testName.equals("testTile1")) {
             System.out.println("############################ " + "testTile1" + " ############################");
             boolean ret;
@@ -99,6 +99,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
+        */
         if (testName.isEmpty() || testName.equals("testRemoveMin")) {
             System.out.println("############################ " + "testRemoveMin" + " ############################");
             boolean ret;
@@ -114,7 +115,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        
+        /*
         if (testName.isEmpty() || testName.equals("testSPathGenerateGraph1")) {
             System.out.println("############################ " + "testSPathGenerateGraph1" + " ############################");
             boolean ret;
@@ -224,7 +225,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        
+        */
         
         if (pass) {
             System.out.println("Pass all.");
@@ -553,10 +554,22 @@ public class MiniTester {
         Arrays.sort(a);
         TilePriorityQ q = new TilePriorityQ(tiles);
         for (int i = 0; i < a.length; ++i) {
+            System.out.println("size: " + q.size);
+            for (var ver : q.heap) {
+                System.out.print(ver.costEstimate + " ");
+            }
             Tile t = q.removeMin();
-            System.out.println(t.costEstimate);
-            if (t.costEstimate != a[i])
+            
+            System.out.println("\nremoving " + t.costEstimate);
+            System.out.println("size: " + q.size);
+            for (var ver : q.heap) {
+                System.out.print(ver.costEstimate + " ");
+            }
+            System.out.println("\n------------------------------------------");
+            if (t.costEstimate != a[i]) {
+                System.out.println("fail: wrong vertex");
                 return false;
+            }
         }
         
         return true;
