@@ -14,7 +14,7 @@ public class TilePriorityQ {
 		for (var vertex : vertices) {
 			size++;
 			heap.add(vertex);
-			downheap(size);
+			minHeapify(0);
 		}
 	}
 	
@@ -48,20 +48,12 @@ public class TilePriorityQ {
 	}
 	
 	private void upheap(int index) {
-		int maxIndex = index;
-		
-		if (leftIndex(index) <= size && heap.get(leftIndex(index)).costEstimate < heap.get(maxIndex).costEstimate) {
-			maxIndex = leftIndex(index);
+		int parentIndex = parentIndex(index);
+		if (parentIndex >= 0 && heap.get(parentIndex).costEstimate > heap.get(index).costEstimate) {
+			swap(parentIndex, index);
+			upheap(parentIndex);
 		}
 		
-		if (rightIndex(index) <= size && heap.get(rightIndex(index)).costEstimate < heap.get(maxIndex).costEstimate) {
-			maxIndex = rightIndex(index);
-		}
-		
-		if (index != maxIndex) {
-			swap(index, maxIndex);
-			upheap(maxIndex);
-		}
 	}
 	
 	private void swap(int i, int j) {
@@ -70,46 +62,40 @@ public class TilePriorityQ {
 		heap.set(j, temp);
 	}
 	private void minHeapify(int i) {
-		// If the node is a non-leaf node and any of its child is smaller
+		// If the node is a non-leaf node and any of its children are smaller
+		
+		// if left child > right child, swap
+		
 		if (!isLeaf(i)) {
-			if (heap.get(i).costEstimate > heap.get(leftIndex(i)).costEstimate ||
-					heap.get(i).costEstimate > heap.get(rightIndex(i)).costEstimate) {
-				if (heap.get(leftIndex(i)).costEstimate < heap.get(rightIndex(i)).costEstimate) {
-					swap(i, leftIndex(i));
-					minHeapify(leftIndex(i));
-				} else {
-					swap(i, rightIndex(i));
-					minHeapify(rightIndex(i));
-				}
+			if (heap.get(i).costEstimate > heap.get(leftIndex(i)).costEstimate) {
+				swap(i,leftIndex(i));
+				minHeapify(leftIndex(i));
+			}
+			else if (heap.get(i).costEstimate > heap.get(rightIndex(i)).costEstimate) {
+				swap(i,rightIndex(i));
+				minHeapify(rightIndex(i));
+			}
+			else if (heap.get(leftIndex(i)).costEstimate < heap.get(rightIndex(i)).costEstimate) {
+				swap(rightIndex(i), leftIndex(i));
 			}
 		}
 	}
 	public Tile removeMin() {
 		Tile popped = heap.get(0);
-		
-		
 		heap.remove(popped);
 		size--;
-		if (size == 1 && heap.get(0).costEstimate > heap.get(1).costEstimate) swap(0,1);
-		else minHeapify(0);
+		minHeapify(0);
+		
 		return popped;
 	}
 	
 	public void updateKeys(Tile t, Tile newPred, double newEstimate) {
 		int index = heap.indexOf(t);
-		if (index != -1) {
-			
-			if (t.costEstimate > newEstimate) {
-				t.costEstimate = newEstimate;
-				downheap(index);
-			} else if (t.costEstimate < newEstimate) {
-				t.costEstimate = newEstimate;
-				upheap(index);
-			}
-			heap.get(index).predecessor = newPred;
-			//heap.get(index).costEstimate = newEstimate;
-		}
-		//downheap(0);
+		
+		t.predecessor = newPred;
+		t.costEstimate = newEstimate;
+		
+		upheap(index);
 	}
 	
 	

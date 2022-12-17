@@ -21,125 +21,218 @@ public class MiniTester {
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        String[] tests= {
-                "testTile1",
-                "testTile2",
-                "testBFS1",
-                "testBFS2",
-                "testDFS1",
-                "testDFS2",
-                "testEdges",
-                "testNeighbors1",
-                "testNeighbors2",
-                "testPathCost",
-                "testRemoveMin",
-                "testUpdateKeys",
-                "testSPathGenerateGraph1",
-                "testSPathGenerateGraph2",
-                "testFindPath1Arg1",
-                "testFindPath1Arg2",
-                "testFindPath2Args",
-                "testFindPath3Args",
-                "testFPathGenerateGraph1",
-                "testFPathGenerateGraph2",
-                "testSPathGenerateGraphWithMetro",
-                "testFPathGenerateGraphWithMetro",
-                "testSSPathGenerateGraph",
-                "testSafeFindPath1",
-                "testSafeFindPath2",
-                "testSafeFindPath3",
-                "testSafeFindPath4"
-            
-            
-            
-            
-            
-            
-            
-        };
-        args = new String[1];
-        for(int index=0; index<tests.length;index++)
-        {
-            System.out.println(tests[index]);
-            args[0]=tests[index];
-            String testName = args[0];
-            boolean pass = false;
-            if (testName.equals("testTile1")) {
-                pass = testTile1();
-            } else if (testName.equals("testTile2")) {
-                pass = testTile2();
-            } else if (testName.equals("testBFS1")) {
-                pass = testBFS1();
-            } else if (testName.equals("testDFS1")) {
-                pass = testDFS1();
-            } else if (testName.equals("testBFS2")) {
-                pass = testBFS2();
-            } else if (testName.equals("testDFS2")) {
-                pass = testDFS2();
-            } else if (testName.equals("testEdges")) {
-                pass = testEdges();
-            } else if (testName.equals("testNeighbors1")) {
-                pass = testNeighbors1();
-            } else if (testName.equals("testNeighbors2")) {
-                pass = testNeighbors2();
-            } else if (testName.equals("testPathCost")) {
-                pass = testPathCost();
-            } else if (testName.equals("testRemoveMin")) {
-                pass = testRemoveMin();
-            } else if (testName.equals("testUpdateKeys")) {
-                pass = testUpdateKeys();
-            } else if (testName.equals("testSPathGenerateGraph1")) {
-                pass = testSPathGenerateGraph1();
-                break;
-            } else if (testName.equals("testSPathGenerateGraph2")) {
-                pass = testSPathGenerateGraph2();
-            } else if (testName.equals("testFindPath1Arg1")) {
-                pass = testFindPath1Arg1();
-            } else if (testName.equals("testFindPath1Arg2")) {
-                pass = testFindPath1Arg2();
-            } else if (testName.equals("testFindPath2Args")) {
-                pass = testFindPath2Args();
-            } else if (testName.equals("testFindPath3Args")) {
-                pass = testFindPath3Args();
-            } else if (testName.equals("testFPathGenerateGraph1")) {
-                pass = testFPathGenerateGraph1();
-            } else if (testName.equals("testFPathGenerateGraph2")) {
-                pass = testFPathGenerateGraph2();
-            } else if (testName.equals("testSPathGenerateGraphWithMetro")) {
-                pass = testSPathGenerateGraphWithMetro();
-            } else if (testName.equals("testFPathGenerateGraphWithMetro")) {
-                pass = testFPathGenerateGraphWithMetro();
-            } else if (testName.equals("testSSPathGenerateGraph")) {
-                pass = testSSPathGenerateGraph();
-            } else if (testName.equals("testSafeFindPath1")) {
-                pass = testSafeFindPath1();
-            } else if (testName.equals("testSafeFindPath2")) {
-                pass = testSafeFindPath2();
-            } else if (testName.equals("testSafeFindPath3")) {
-                pass = testSafeFindPath3();
-            } else if (testName.equals("testSafeFindPath4")) {
-                pass = testSafeFindPath4();
-            } else {
-                System.out.println("Unknown test " + testName + ".");
-            }
-            
-            if (pass) {
-                System.out.println("pass");
-                //System.exit(0);
-            } else {
-                System.out.println("fail");
-                //System.exit(1);
-            }
-            System.out.println("\n-----------------\n");
+        String testName = "";
+        if (args.length > 0)
+            testName = args[0];
+        
+        // run all tests if no arguments
+        boolean pass = true;
+        int total = 0, passed = 0;
+        
+        if (testName.isEmpty() || testName.equals("testTile1")) {
+            System.out.println("############################ " + "testTile1" + " ############################");
+            boolean ret;
+            pass &= (ret = testTile1());
+            ++total;
+            passed += ret ? 1 : 0;
         }
-        /*
-        if (args.length != 1) {
-            System.out.println("Need one argument.");
+        if (testName.isEmpty() || testName.equals("testTile2")) {
+            System.out.println("############################ " + "testTile2" + " ############################");
+            boolean ret;
+            pass &= (ret = testTile2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testBFS1")) {
+            System.out.println("############################ " + "testBFS1" + " ############################");
+            boolean ret;
+            pass &= (ret = testBFS1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testDFS1")) {
+            System.out.println("############################ " + "testDFS1" + " ############################");
+            boolean ret;
+            pass &= (ret = testDFS1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testBFS2")) {
+            System.out.println("############################ " + "testBFS2" + " ############################");
+            boolean ret;
+            pass &= (ret = testBFS2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testDFS2")) {
+            System.out.println("############################ " + "testDFS2" + " ############################");
+            boolean ret;
+            pass &= (ret = testDFS2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testEdges")) {
+            System.out.println("############################ " + "testEdges" + " ############################");
+            boolean ret;
+            pass &= (ret = testEdges());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testNeighbors1")) {
+            System.out.println("############################ " + "testNeighbors1" + " ############################");
+            boolean ret;
+            pass &= (ret = testNeighbors1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testNeighbors2")) {
+            System.out.println("############################ " + "testNeighbors2" + " ############################");
+            boolean ret;
+            pass &= (ret = testNeighbors2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testPathCost")) {
+            System.out.println("############################ " + "testPathCost" + " ############################");
+            boolean ret;
+            pass &= (ret = testPathCost());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testRemoveMin")) {
+            System.out.println("############################ " + "testRemoveMin" + " ############################");
+            boolean ret;
+            pass &= (ret = testRemoveMin());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        
+        if (testName.isEmpty() || testName.equals("testUpdateKeys")) {
+            System.out.println("############################ " + "testUpdateKeys" + " ############################");
+            boolean ret;
+            pass &= (ret = testUpdateKeys());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        
+        if (testName.isEmpty() || testName.equals("testSPathGenerateGraph1")) {
+            System.out.println("############################ " + "testSPathGenerateGraph1" + " ############################");
+            boolean ret;
+            pass &= (ret = testSPathGenerateGraph1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSPathGenerateGraph2")) {
+            System.out.println("############################ " + "testSPathGenerateGraph2" + " ############################");
+            boolean ret;
+            pass &= (ret = testSPathGenerateGraph2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+       
+        if (testName.isEmpty() || testName.equals("testFindPath1Arg1")) {
+            System.out.println("############################ " + "testFindPath1Arg1" + " ############################");
+            boolean ret;
+            pass &= (ret = testFindPath1Arg1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        
+        
+        if (testName.isEmpty() || testName.equals("testFindPath1Arg2")) {
+            System.out.println("############################ " + "testFindPath1Arg2" + " ############################");
+            boolean ret;
+            pass &= (ret = testFindPath1Arg2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        
+        if (testName.isEmpty() || testName.equals("testFindPath2Args")) {
+            System.out.println("############################ " + "testFindPath2Args" + " ############################");
+            boolean ret;
+            pass &= (ret = testFindPath2Args());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testFindPath3Args")) {
+            System.out.println("############################ " + "testFindPath3Args" + " ############################");
+            boolean ret;
+            pass &= (ret = testFindPath3Args());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testFPathGenerateGraph1")) {
+            System.out.println("############################ " + "testFPathGenerateGraph1" + " ############################");
+            boolean ret;
+            pass &= (ret = testFPathGenerateGraph1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testFPathGenerateGraph2")) {
+            System.out.println("############################ " + "testFPathGenerateGraph2" + " ############################");
+            boolean ret;
+            pass &= (ret = testFPathGenerateGraph2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSPathGenerateGraphWithMetro")) {
+            System.out.println("############################ " + "testSPathGenerateGraphWithMetro" + " ############################");
+            boolean ret;
+            pass &= (ret = testSPathGenerateGraphWithMetro());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testFPathGenerateGraphWithMetro")) {
+            System.out.println("############################ " + "testFPathGenerateGraphWithMetro" + " ############################");
+            boolean ret;
+            pass &= (ret = testFPathGenerateGraphWithMetro());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSSPathGenerateGraph")) {
+            System.out.println("############################ " + "testSSPathGenerateGraph" + " ############################");
+            boolean ret;
+            pass &= (ret = testSSPathGenerateGraph());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSafeFindPath1")) {
+            System.out.println("############################ " + "testSafeFindPath1" + " ############################");
+            boolean ret;
+            pass &= (ret = testSafeFindPath1());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSafeFindPath2")) {
+            System.out.println("############################ " + "testSafeFindPath2" + " ############################");
+            boolean ret;
+            pass &= (ret = testSafeFindPath2());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSafeFindPath3")) {
+            System.out.println("############################ " + "testSafeFindPath3" + " ############################");
+            boolean ret;
+            pass &= (ret = testSafeFindPath3());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        if (testName.isEmpty() || testName.equals("testSafeFindPath4")) {
+            System.out.println("############################ " + "testSafeFindPath4" + " ############################");
+            boolean ret;
+            pass &= (ret = testSafeFindPath4());
+            ++total;
+            passed += ret ? 1 : 0;
+        }
+        
+        
+        if (pass) {
+            System.out.println("Pass all.");
+            System.exit(0);
+        } else {
+            System.out.println("Pass " + passed + "/" + total + ".");
             System.exit(1);
         }
-
-         */
-        
         
     }
     
@@ -351,6 +444,7 @@ public class MiniTester {
         tile2id = new HashMap<Tile, Integer>();
         for (int i = 0; i < 5; ++i) {
             TestTile t  = new TestTile();
+            t.nodeID = i;
             tile2id.put(t, i);
             tiles.add(t);
         }
@@ -457,23 +551,14 @@ public class MiniTester {
             tiles.add(t);
         }
         Arrays.sort(a);
-        
         TilePriorityQ q = new TilePriorityQ(tiles);
-        for (var t : q.heap) {
-            System.out.print(t.costEstimate + " ");
-        }
-        System.out.println("===========");
         for (int i = 0; i < a.length; ++i) {
-            for (var t : q.heap) {
-                System.out.print(t.costEstimate + " ");
-            }
-            System.out.println("\n=== removing ===");
-            System.out.println("size is " + q.size);
             Tile t = q.removeMin();
             System.out.println(t.costEstimate);
             if (t.costEstimate != a[i])
                 return false;
         }
+        
         return true;
     }
     
@@ -486,7 +571,6 @@ public class MiniTester {
             t.costEstimate = a[i];
             tiles.add(t);
         }
-        Arrays.sort(a);
         TilePriorityQ q = new TilePriorityQ(tiles);
         Tile t0 = new TestTile();
         t0.costEstimate = 0.5;
@@ -494,7 +578,6 @@ public class MiniTester {
             Tile t1 = tiles.get(b[i]);
             q.updateKeys(t1, t0, 1);
             Tile t2 = q.removeMin();
-            System.out.println("expected: " + t1.costEstimate + ", got: " + t2.costEstimate);
             if (t2 != t1 || t2.costEstimate != 1)
                 return false;
         }
@@ -526,6 +609,7 @@ public class MiniTester {
         tileArray = new Tile[map.length][map[0].length];
         ArrayList<MetroTile> metros = new ArrayList<MetroTile>();
         
+        int id = 0;
         for (int i = 0; i < map.length; ++i)
             for (int j = 0; j < map[0].length; ++j) {
                 Tile t = null;
@@ -569,6 +653,7 @@ public class MiniTester {
                         t = new MountainTile();
                 }
                 
+                t.nodeID = id++;
                 tileArray[i][j] = t;
                 world.add(t);
             }
@@ -652,28 +737,49 @@ public class MiniTester {
         buildWorld(lgMap, false);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Tile> path = shortest.findPath(world.get(0));
-        /*
-         * s
-         * f
-         * f f d p
-         */
-        System.out.println(path.size());
-        if (path.size() != 6) {
-            System.out.println("Path length (number of vertices, including start and end) should be 6.");
-            return false;
-        }
-        
-        Tile[] a = { tileArray[0][0], tileArray[1][0], tileArray[2][0],
-                tileArray[2][1], tileArray[2][2], tileArray[2][3]
-        };
-        for (int i = 0; i < a.length; ++i)
-            if (path.get(i) != a[i]) {
-                System.out.println("Wrong path.");
+        if (path.size() == 6) { // to furthest (weighted) vertex
+            /*
+             * s
+             * f
+             * f f d p
+             */
+            Tile[] a = { tileArray[0][0], tileArray[1][0], tileArray[2][0],
+                    tileArray[2][1], tileArray[2][2], tileArray[2][3]
+            };
+            for (int i = 0; i < a.length; ++i)
+                if (path.get(i) != a[i]) {
+                    System.out.println("Wrong path.");
+                    return false;
+                }
+            
+            if (shortest.g.computePathCost(path) != 8) {
+                System.out.println("Path cost should be 8.");
                 return false;
             }
-        
-        if (shortest.g.computePathCost(path) != 8) {
-            System.out.println("Path cost should be 8.");
+            
+        } else if (path.size() == 7) { // to destination
+            /* s
+             * f
+             * f f
+             *   f M e
+             */
+            Tile[] a = { tileArray[0][0], tileArray[1][0], tileArray[2][0], tileArray[2][1],
+                    tileArray[3][1], tileArray[3][2], tileArray[3][3]
+            };
+            
+            for (int i = 0; i < a.length; ++i)
+                if (path.get(i) != a[i]) {
+                    System.out.println("Wrong path.");
+                    return false;
+                }
+            
+            if (shortest.g.computePathCost(path) != 6) {
+                System.out.println("Path cost should be 6.");
+                return false;
+            }
+            
+        } else {
+            System.out.println("Wrong path length");
             return false;
         }
         return true;
@@ -769,7 +875,7 @@ public class MiniTester {
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
         if (edges.size() != 42) {
-            System.out.println("There should be 40 edges. Note that MountainTile is not reachable.");
+            System.out.println("There should be 42 edges. Note that MountainTile is not reachable.");
             return false;
         }
         for (Graph.Edge e: edges) {
@@ -795,7 +901,7 @@ public class MiniTester {
         FastestPath shortest = new FastestPath(world.get(0));
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
         if (edges.size() != 42) {
-            System.out.println("There should be 40 edges. Note that MountainTile is not reachable.");
+            System.out.println("There should be 42 edges. Note that MountainTile is not reachable.");
             return false;
         }
         for (Graph.Edge e: edges) {
@@ -860,7 +966,7 @@ public class MiniTester {
     // test SafestShortestPath.findPath(Tile start, LinkedList<Tile> waypoints)
     public static boolean testSafeFindPath1() { // 1 point
         buildWorld(dgMap, false);
-        ShortestPath shortest = new SafestShortestPath(world.get(0), 100);
+        SafestShortestPath shortest = new SafestShortestPath(world.get(0), 100);
         LinkedList<Tile> waypoints = new LinkedList<Tile>();
         ArrayList<Tile> path = shortest.findPath(world.get(0), waypoints);
         /*
@@ -883,7 +989,7 @@ public class MiniTester {
                 return false;
             }
         
-        if (shortest.g.computePathCost(path) != 6) {
+        if (shortest.costGraph.computePathCost(path) != 6) {
             System.out.println("Path cost should be 6.");
             return false;
         }
@@ -893,7 +999,7 @@ public class MiniTester {
     // test SafestShortestPath.findPath(Tile start, LinkedList<Tile> waypoints)
     public static boolean testSafeFindPath2() { // 1 point
         buildWorld(dgMap, false);
-        ShortestPath shortest = new SafestShortestPath(world.get(0), 1);
+        SafestShortestPath shortest = new SafestShortestPath(world.get(0), 1);
         LinkedList<Tile> waypoints = new LinkedList<Tile>();
         ArrayList<Tile> path = shortest.findPath(world.get(0), waypoints);
         /*
@@ -906,7 +1012,7 @@ public class MiniTester {
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
-        if (shortest.g.computePathCost(path) != 16) {
+        if (shortest.costGraph.computePathCost(path) != 16) {
             System.out.println("Path cost should be 16.");
             return false;
         }
@@ -916,7 +1022,7 @@ public class MiniTester {
     // test SafestShortestPath.findPath(Tile start, LinkedList<Tile> waypoints)
     public static boolean testSafeFindPath3() { // 1 point
         buildWorld(dgMap, false);
-        ShortestPath shortest = new SafestShortestPath(world.get(0), 100);
+        SafestShortestPath shortest = new SafestShortestPath(world.get(0), 100);
         LinkedList<Tile> waypoints = new LinkedList<Tile>();
         waypoints.add(tileArray[3][2]);
         ArrayList<Tile> path = shortest.findPath(world.get(0), waypoints);
@@ -930,7 +1036,7 @@ public class MiniTester {
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
-        if (shortest.g.computePathCost(path) != 8) {
+        if (shortest.costGraph.computePathCost(path) != 8) {
             System.out.println("Path cost should be 8.");
             return false;
         }
@@ -940,7 +1046,7 @@ public class MiniTester {
     // test SafestShortestPath.findPath(Tile start, LinkedList<Tile> waypoints)
     public static boolean testSafeFindPath4() { // 1 point
         buildWorld(dgMap, false);
-        ShortestPath shortest = new SafestShortestPath(world.get(0), 100);
+        SafestShortestPath shortest = new SafestShortestPath(world.get(0), 100);
         LinkedList<Tile> waypoints = new LinkedList<Tile>();
         waypoints.add(tileArray[3][0]);
         waypoints.add(tileArray[3][2]);
@@ -965,7 +1071,7 @@ public class MiniTester {
                 return false;
             }
         
-        if (shortest.g.computePathCost(path) != 14) {
+        if (shortest.costGraph.computePathCost(path) != 14) {
             System.out.println("Path cost should be 14.");
             return false;
         }

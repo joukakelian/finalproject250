@@ -19,8 +19,7 @@ public class Graph {
     public void addEdge(Tile origin, Tile destination, double weight) {
         Edge e = new Edge(origin, destination, weight);
         edgeList.add(e);
-        origin.addNeighbor(destination);
-        destination.addNeighbor(origin);
+        destination.edgeWeight = weight;
     }
     
     public ArrayList<Edge> getAllEdges() {

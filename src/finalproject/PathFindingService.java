@@ -12,9 +12,15 @@ public abstract class PathFindingService {
 	
 	public PathFindingService(Tile start) {
     	this.source = start;
+     
+     
     }
 
 	public abstract void generateGraph();
+    
+    // #################################################################################################################
+                        // USE UPDATE KEYS TO READJUST THE POSITION AFTER CHANGING THE COST ESTIMATE
+    // #################################################################################################################
     
     // finding shortest path to a tile's destination field
     public ArrayList<Tile> findPath(Tile startNode) {
@@ -28,47 +34,43 @@ public abstract class PathFindingService {
         }
         
         Tile dest = null;
-        System.out.println("*");
-        while (!queue.isEmpty()) {
-            System.out.println("size is " + queue.size);
-            Tile min = queue.removeMin();
-            System.out.println("min: " + min);
-            System.out.println("min.costEstimate: " + min.costEstimate);
-            if ((queue.size == 0 && dest == null) || min.isDestination) {
-                dest = min;
-                System.out.println("###############################################");
-                System.out.println("destination!!! " + dest);
-                System.out.println("###############################################");
+        for (var vertex : g.verticesList) {
+            if (vertex.isDestination) {
+                dest = vertex;
+                break;
             }
+        }
+        while (!queue.isEmpty()) {
+            System.out.println("-------------------------------------------");
+            Tile min = queue.removeMin();
+            System.out.println("adding " + min);
+            
             visited.add(min);
-            for (var n : min.neighbors) {
+            
+            for (var n : g.getNeighbors(min)) {
                 if (queue.heap.contains(n)) {
-                    ArrayList<Tile> path = new ArrayList<>();
-                    path.add(min);
-                    path.add(n);
-                    g.computePathCost(path);
-                    if (min.costEstimate + g.computePathCost(path) < n.costEstimate) {
-                        n.costEstimate = min.costEstimate + g.computePathCost(path);
-                        n.predecessor = min;
-                        System.out.println("n: " + n);
+                    
+                    if (min.costEstimate + n.edgeWeight < n.costEstimate) {
+                        queue.updateKeys(n, min, min.costEstimate + n.edgeWeight);
+                        System.out.println("neighbor is: " + n);
                     }
                 }
-                
             }
         }
         
-        System.out.println("**");
         
-        ArrayList<Tile> pathArr = new ArrayList<>();
-        while (dest != startNode && dest != null) {
-            pathArr.add(0, dest);
-            System.out.println("dest: " + dest);
+        
+        System.out.println("\n------------------> dest is: " + dest);
+        ArrayList<Tile> path = new ArrayList<>();
+        while (dest != null && dest != startNode) {
+            path.add(0,dest);
             dest = dest.predecessor;
+            
         }
-    
-        pathArr.add(0, startNode);
-        System.out.println("***");
-        return pathArr;
+        path.add(0,startNode);
+        System.out.println("\n+++++++++ path is +++++++++");
+        System.out.println(path + "\n");
+        return path;
     }
     
     //TODO level 5: Implement basic dijkstra's algorithm to path find to a known destination

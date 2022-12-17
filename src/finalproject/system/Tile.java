@@ -17,6 +17,7 @@ public abstract class Tile extends TileComponent {
     // These will become useful when implementing Dijkstra
     public Tile predecessor; 
     public double costEstimate;
+    public double edgeWeight;
     
     
     //connect adjacent tiles with edge
