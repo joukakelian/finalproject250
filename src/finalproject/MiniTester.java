@@ -28,7 +28,7 @@ public class MiniTester {
         // run all tests if no arguments
         boolean pass = true;
         int total = 0, passed = 0;
-        /*
+        
         if (testName.isEmpty() || testName.equals("testTile1")) {
             System.out.println("############################ " + "testTile1" + " ############################");
             boolean ret;
@@ -99,7 +99,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        */
+        
         if (testName.isEmpty() || testName.equals("testRemoveMin")) {
             System.out.println("############################ " + "testRemoveMin" + " ############################");
             boolean ret;
@@ -115,7 +115,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        /*
+        
         if (testName.isEmpty() || testName.equals("testSPathGenerateGraph1")) {
             System.out.println("############################ " + "testSPathGenerateGraph1" + " ############################");
             boolean ret;
@@ -155,6 +155,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
+        
         if (testName.isEmpty() || testName.equals("testFindPath3Args")) {
             System.out.println("############################ " + "testFindPath3Args" + " ############################");
             boolean ret;
@@ -162,6 +163,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
+        /*
         if (testName.isEmpty() || testName.equals("testFPathGenerateGraph1")) {
             System.out.println("############################ " + "testFPathGenerateGraph1" + " ############################");
             boolean ret;

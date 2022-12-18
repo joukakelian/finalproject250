@@ -18,13 +18,8 @@ public abstract class PathFindingService {
 
 	public abstract void generateGraph();
     
-    // #################################################################################################################
-                        // USE UPDATE KEYS TO READJUST THE POSITION AFTER CHANGING THE COST ESTIMATE
-    // #################################################################################################################
-    
     // finding shortest path to a tile's destination field
     public ArrayList<Tile> findPath(Tile startNode) {
-        ArrayList<Tile> visited = new ArrayList<>();
         TilePriorityQ queue = new TilePriorityQ(g.verticesList);
         
         startNode.costEstimate = 0;
@@ -40,25 +35,17 @@ public abstract class PathFindingService {
                 break;
             }
         }
-        while (!queue.isEmpty()) {
-            System.out.println("-------------------------------------------");
+        while (queue.size != 0) {
             Tile min = queue.removeMin();
-            System.out.println("adding " + min);
-            
-            visited.add(min);
-            
             for (var n : g.getNeighbors(min)) {
                 if (queue.heap.contains(n)) {
                     
                     if (min.costEstimate + n.edgeWeight < n.costEstimate) {
                         queue.updateKeys(n, min, min.costEstimate + n.edgeWeight);
-                        System.out.println("neighbor is: " + n);
                     }
                 }
             }
         }
-        
-        
         
         System.out.println("\n------------------> dest is: " + dest);
         ArrayList<Tile> path = new ArrayList<>();
@@ -73,9 +60,39 @@ public abstract class PathFindingService {
         return path;
     }
     
-    //TODO level 5: Implement basic dijkstra's algorithm to path find to a known destination
     public ArrayList<Tile> findPath(Tile start, Tile end) {
-    	return null;
+        TilePriorityQ queue = new TilePriorityQ(g.verticesList);
+    
+        start.costEstimate = 0;
+        for (var tile: queue.heap) {
+            if (tile != start) tile.costEstimate = Integer.MAX_VALUE;
+            tile.predecessor = null;
+        }
+        
+        while (queue.size != 0) {
+            Tile min = queue.removeMin();
+            
+            for (var n : g.getNeighbors(min)) {
+                if (queue.heap.contains(n)) {
+                
+                    if (min.costEstimate + n.edgeWeight < n.costEstimate) {
+                        queue.updateKeys(n, min, min.costEstimate + n.edgeWeight);
+                    }
+                }
+            }
+            if (min == end) break;
+        }
+        
+        ArrayList<Tile> path = new ArrayList<>();
+        while (end != null && end != start) {
+            path.add(0,end);
+            end = end.predecessor;
+        
+        }
+        path.add(0,start);
+        System.out.println("\n+++++++++ path is +++++++++");
+        System.out.println(path + "\n");
+        return path;
     }
 
     //TODO level 5: Implement basic dijkstra's algorithm to path find to the final destination passing through given waypoints

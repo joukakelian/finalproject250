@@ -18,6 +18,9 @@ public abstract class Tile extends TileComponent {
     public Tile predecessor; 
     public double costEstimate;
     public double edgeWeight;
+    public Tile right = null;
+    public Tile left = null;
+    public Tile parent = null;
     
     
     //connect adjacent tiles with edge
