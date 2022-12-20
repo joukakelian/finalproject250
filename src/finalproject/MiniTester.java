@@ -163,7 +163,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        /*
+        
         if (testName.isEmpty() || testName.equals("testFPathGenerateGraph1")) {
             System.out.println("############################ " + "testFPathGenerateGraph1" + " ############################");
             boolean ret;
@@ -227,7 +227,6 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
-        */
         
         if (pass) {
             System.out.println("Pass all.");
@@ -593,8 +592,12 @@ public class MiniTester {
             Tile t1 = tiles.get(b[i]);
             q.updateKeys(t1, t0, 1);
             Tile t2 = q.removeMin();
-            if (t2 != t1 || t2.costEstimate != 1)
+            if (t2 != t1 || t2.costEstimate != 1) {
+                System.out.println("t2 != t1: " + (t2 != t1));
+                System.out.println("t2.costEstimate != 1: " + (t2.costEstimate != 1));
+                System.out.println("failed :(");
                 return false;
+            }
         }
         
         return true;
@@ -866,6 +869,7 @@ public class MiniTester {
     }
     
     // test FastestPath
+    
     public static boolean testFPathGenerateGraph2() { // 1 point
         buildWorld(lgMap, false);
         FastestPath shortest = new FastestPath(world.get(0));
@@ -884,11 +888,14 @@ public class MiniTester {
         return true;
     }
     
+    
+    
     // test ShortestPath (with metro)
     public static boolean testSPathGenerateGraphWithMetro() { // 1 point
         buildWorld(lgMap, true);
         ShortestPath shortest = new ShortestPath(world.get(0));
         ArrayList<Graph.Edge> edges = shortest.g.getAllEdges();
+        System.out.println("edges size is: " + edges.size());
         if (edges.size() != 42) {
             System.out.println("There should be 42 edges. Note that MountainTile is not reachable.");
             return false;

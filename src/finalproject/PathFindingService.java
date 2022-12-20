@@ -12,8 +12,6 @@ public abstract class PathFindingService {
 	
 	public PathFindingService(Tile start) {
     	this.source = start;
-     
-     
     }
 
 	public abstract void generateGraph();
@@ -39,9 +37,14 @@ public abstract class PathFindingService {
             Tile min = queue.removeMin();
             for (var n : g.getNeighbors(min)) {
                 if (queue.heap.contains(n)) {
-                    
-                    if (min.costEstimate + n.edgeWeight < n.costEstimate) {
-                        queue.updateKeys(n, min, min.costEstimate + n.edgeWeight);
+                    ArrayList<Tile> path = new ArrayList<>();
+                    path.add(min);
+                    path.add(n);
+                    double computePathCost = g.computePathCost(path);
+        
+                    if (min.costEstimate + computePathCost < n.costEstimate) {
+                        n.costEstimate = min.costEstimate + computePathCost;
+                        n.predecessor = min;
                     }
                 }
             }
@@ -61,43 +64,89 @@ public abstract class PathFindingService {
     }
     
     public ArrayList<Tile> findPath(Tile start, Tile end) {
-        TilePriorityQ queue = new TilePriorityQ(g.verticesList);
+        ArrayList<Tile> path = new ArrayList<>();
+        if (end == null) findPath(start);
+        else {
+            TilePriorityQ queue = new TilePriorityQ(g.verticesList);
     
-        start.costEstimate = 0;
-        for (var tile: queue.heap) {
-            if (tile != start) tile.costEstimate = Integer.MAX_VALUE;
-            tile.predecessor = null;
-        }
+            start.costEstimate = 0;
+            for (var tile : queue.heap) {
+                if (tile != start) tile.costEstimate = Integer.MAX_VALUE;
+                tile.predecessor = null;
+            }
+    
+            while (queue.size != 0) {
+                Tile min = queue.removeMin();
         
-        while (queue.size != 0) {
-            Tile min = queue.removeMin();
-            
-            for (var n : g.getNeighbors(min)) {
-                if (queue.heap.contains(n)) {
+                for (var n : g.getNeighbors(min)) {
+                    if (queue.heap.contains(n)) {
+                        ArrayList<Tile> edgePath = new ArrayList<>();
+                        edgePath.add(min);
+                        edgePath.add(n);
+                        double computePathCost = g.computePathCost(edgePath);
                 
-                    if (min.costEstimate + n.edgeWeight < n.costEstimate) {
-                        queue.updateKeys(n, min, min.costEstimate + n.edgeWeight);
+                        if (min.costEstimate + computePathCost < n.costEstimate) {
+                            n.costEstimate = min.costEstimate + computePathCost;
+                            n.predecessor = min;
+                        }
                     }
                 }
+                if (min == end) break;
             }
-            if (min == end) break;
+    
+            while (end != null && end != start) {
+                path.add(0, end);
+                end = end.predecessor;
+            }
+    
+            path.add(0, start);
+            System.out.println("\n+++++++++ path is +++++++++");
+            System.out.println(path + "\n");
         }
-        
-        ArrayList<Tile> path = new ArrayList<>();
-        while (end != null && end != start) {
-            path.add(0,end);
-            end = end.predecessor;
-        
-        }
-        path.add(0,start);
-        System.out.println("\n+++++++++ path is +++++++++");
-        System.out.println(path + "\n");
+    
         return path;
     }
 
-    //TODO level 5: Implement basic dijkstra's algorithm to path find to the final destination passing through given waypoints
-    public ArrayList<Tile> findPath(Tile start, LinkedList<Tile> waypoints){
-    	return null;
+    //TODO level 5: Implement basic dijkstra's algorithm to find path to the final destination passing through given waypoints
+    public ArrayList<Tile> findPath(Tile start, LinkedList<Tile> waypoints) {
+        ArrayList<Tile> completePath = new ArrayList<>();
+    
+        if (waypoints.size() == 0 || waypoints == null) findPath(start);
+        
+        else {
+            System.out.println("\nstart is " + start);
+            System.out.println("waypoints size is: " + waypoints.size());
+    
+    
+            System.out.println("start to W1");
+            for (var tile : findPath(start, waypoints.get(0))) {
+                completePath.add(tile);
+            }
+            System.out.println("removing: " + completePath.get(completePath.size() - 1));
+            completePath.remove(completePath.size() - 1);
+            System.out.println("waypoints size is: " + waypoints.size());
+    
+            if (waypoints.size() != 1) {
+                System.out.println("here");
+                for (int i = 0; i < waypoints.size() - 1; i++) {
+                    System.out.println("W to W");
+            
+                    for (var tile : findPath(waypoints.get(i), waypoints.get(i + 1))) {
+                        completePath.add(tile);
+                    }
+                    System.out.println("removing: " + completePath.get(completePath.size() - 1));
+                    completePath.remove(completePath.size() - 1);
+                }
+            }
+    
+            System.out.println("W to end");
+            for (var tile : findPath(waypoints.get(waypoints.size() - 1))) {
+                completePath.add(tile);
+            }
+    
+            System.out.println("completePath is: " + completePath);
+        }
+        return completePath;
     }
         
 }

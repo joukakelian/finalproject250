@@ -1,7 +1,7 @@
 package finalproject;
 
-
 import finalproject.system.Tile;
+import finalproject.tiles.MetroTile;
 
 public class ShortestPath extends PathFindingService {
     public ShortestPath(Tile start) {
@@ -18,7 +18,11 @@ public class ShortestPath extends PathFindingService {
             System.out.println(vertex);
             
             for (var neigh : vertex.neighbors) {
-                if (neigh.isWalkable()) g.addEdge(vertex, neigh, neigh.distanceCost);
+                if (neigh instanceof MetroTile && vertex instanceof MetroTile) {
+                    ((MetroTile) neigh).fixMetro(vertex);
+                    g.addEdge(vertex, neigh, ((MetroTile) neigh).metroDistanceCost);
+                }
+                else if (neigh.isWalkable()) g.addEdge(vertex, neigh, neigh.distanceCost);
             }
         }
 	}

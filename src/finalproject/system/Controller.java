@@ -439,6 +439,7 @@ public class Controller {
 
         LinkedList<Tile> waypoints = StateManager.getInstance().currentWaypoints;
         path = pf.findPath(StateManager.getInstance().getCurrentMap(), waypoints);
+        path = pf.findPath(StateManager.getInstance().getCurrentMap());
 
         //visualize the path if available
         visualizePath(path);

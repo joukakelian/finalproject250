@@ -97,11 +97,19 @@ public class TilePriorityQ {
     
     public void updateKeys(Tile t, Tile newPred, double newEstimate) {
         int index = heap.indexOf(t);
-    
-        t.predecessor = newPred;
-        t.costEstimate = newEstimate;
-    
-        upheap(index);
+        if (index != -1) {
+        
+            if (t.costEstimate > newEstimate) {
+                t.costEstimate = newEstimate;
+                downheap(index);
+            } else if (t.costEstimate < newEstimate) {
+                t.costEstimate = newEstimate;
+                upheap(index);
+            }
+            heap.get(index).predecessor = newPred;
+            //heap.get(index).costEstimate = newEstimate;
+        }
+        minHeapify(index);
     }
     
 }
