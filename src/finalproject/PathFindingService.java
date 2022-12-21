@@ -50,7 +50,6 @@ public abstract class PathFindingService {
             }
         }
         
-        System.out.println("\n------------------> dest is: " + dest);
         ArrayList<Tile> path = new ArrayList<>();
         while (dest != null && dest != startNode) {
             path.add(0,dest);
@@ -58,8 +57,7 @@ public abstract class PathFindingService {
             
         }
         path.add(0,startNode);
-        System.out.println("\n+++++++++ path is +++++++++");
-        System.out.println(path + "\n");
+       
         return path;
     }
     
@@ -100,8 +98,6 @@ public abstract class PathFindingService {
             }
     
             path.add(0, start);
-            System.out.println("\n+++++++++ path is +++++++++");
-            System.out.println(path + "\n");
         }
     
         return path;
@@ -113,37 +109,27 @@ public abstract class PathFindingService {
         if (waypoints.size() == 0) findPath(start);
         
         else {
-            System.out.println("\nstart is " + start);
-            System.out.println("waypoints size is: " + waypoints.size());
-    
-    
-            System.out.println("start to W1");
+           
             for (var tile : findPath(start, waypoints.get(0))) {
                 completePath.add(tile);
             }
-            System.out.println("removing: " + completePath.get(completePath.size() - 1));
             completePath.remove(completePath.size() - 1);
-            System.out.println("waypoints size is: " + waypoints.size());
+            
     
             if (waypoints.size() != 1) {
-                System.out.println("here");
                 for (int i = 0; i < waypoints.size() - 1; i++) {
-                    System.out.println("W to W");
             
                     for (var tile : findPath(waypoints.get(i), waypoints.get(i + 1))) {
                         completePath.add(tile);
                     }
-                    System.out.println("removing: " + completePath.get(completePath.size() - 1));
                     completePath.remove(completePath.size() - 1);
                 }
             }
     
-            System.out.println("W to end");
             for (var tile : findPath(waypoints.get(waypoints.size() - 1))) {
                 completePath.add(tile);
             }
     
-            System.out.println("completePath is: " + completePath);
         }
         return completePath;
     }

@@ -57,11 +57,8 @@ public class SafestShortestPath extends ShortestPath {
 		super.g = costGraph;
 		
 		ArrayList<Tile> pc = super.findPath(start, waypoints);
-		System.out.println("pc: " + pc);
 		double pcDmgCost = 0.0;
 		for (var tile : pc) {
-			System.out.println("for loop");
-			System.out.println("tile: " + tile);
 			pcDmgCost += tile.damageCost;
 		}
 		if (pcDmgCost < health) return pc;
@@ -69,11 +66,8 @@ public class SafestShortestPath extends ShortestPath {
 		
 		super.g = damageGraph;
 		ArrayList<Tile> pd = super.findPath(start, waypoints);
-		System.out.println("pd: " + pd);
 		double pdDmgCost = 0.0;
 		for (var tile : pd) {
-			System.out.println("for loop");
-			System.out.println("tile: " + tile);
 			pdDmgCost += tile.damageCost;
 		}
 		if (pdDmgCost > health) return null;
@@ -81,7 +75,6 @@ public class SafestShortestPath extends ShortestPath {
 		
 		while (true) {
 			double lambda = (pcDistCost - pdDistCost) / (pdDmgCost - pcDmgCost);
-			System.out.println("lambda: " + lambda);
 			for (var edge : aggregatedGraph.getAllEdges()) {
 				edge.weight = edge.destination.distanceCost + (lambda * edge.destination.damageCost);
 			}
