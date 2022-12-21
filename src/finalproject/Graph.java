@@ -75,33 +75,4 @@ public class Graph {
         
     }
     
-    public static void main(String[] args) {
-        Tile vertex1 = new DesertTile();
-        Tile vertex2 = new DesertTile();
-        Tile vertex3 = new PlainTile();
-        Tile vertex4 = new PlainTile();
-    
-        ArrayList<Tile> vertices = new ArrayList<>();
-        vertices.add(vertex1);
-        vertices.add(vertex2);
-        vertices.add(vertex3);
-        vertices.add(vertex4);
-    
-    
-        Graph weightedGraph = new Graph(vertices);
-    
-        weightedGraph.addEdge(vertex1, vertex2, 5);
-        weightedGraph.addEdge(vertex2, vertex3, 5);
-        weightedGraph.addEdge(vertex3, vertex4, 5);
-        weightedGraph.addEdge(vertex4, vertex1, 5);
-    
-    
-        System.out.print("Path length from tile 1 to tile 4: ");
-        System.out.println(weightedGraph.computePathCost(vertices));
-    
-        for (Edge edge : weightedGraph.getAllEdges())
-            System.out.println("Edge linking: " + edge.origin + " and " + edge.destination
-                    + " with weight " + edge.weight);
-    }
-    
 }

@@ -199,6 +199,7 @@ public class MiniTester {
             ++total;
             passed += ret ? 1 : 0;
         }
+        
         if (testName.isEmpty() || testName.equals("testSafeFindPath1")) {
             System.out.println("############################ " + "testSafeFindPath1" + " ############################");
             boolean ret;
@@ -949,6 +950,9 @@ public class MiniTester {
         SafestShortestPath sspath = new SafestShortestPath(world.get(0), 100);
         ArrayList<Graph.Edge> edges;
         edges = sspath.costGraph.getAllEdges();
+    
+        System.out.println("Edges size: " + edges.size());
+    
         if (edges.size() != 40) {
             System.out.println("There should be 40 edges. Note that MountainTile is not reachable.");
             return false;
@@ -998,6 +1002,7 @@ public class MiniTester {
          *       e
          */
         if (path.size() != 7) {
+            System.out.println("size is: " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
@@ -1007,11 +1012,14 @@ public class MiniTester {
         };
         for (int i = 0; i < a.length; ++i)
             if (path.get(i) != a[i]) {
+                System.out.println(path);
                 System.out.println("Wrong path.");
                 return false;
             }
         
         if (shortest.costGraph.computePathCost(path) != 6) {
+            System.out.println(path);
+            System.out.println("path cost is: " + shortest.costGraph.computePathCost(path));
             System.out.println("Path cost should be 6.");
             return false;
         }
@@ -1031,10 +1039,14 @@ public class MiniTester {
          *   p p e
          */
         if (path.size() != 7) {
+            System.out.println(path);
+            System.out.println("size is: " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.costGraph.computePathCost(path) != 16) {
+            System.out.println(path);
+            System.out.println("path cost is: " + shortest.costGraph.computePathCost(path));
             System.out.println("Path cost should be 16.");
             return false;
         }
@@ -1055,10 +1067,14 @@ public class MiniTester {
          *     p e
          */
         if (path.size() != 7) {
+            System.out.println(path);
+            System.out.println("size is: " + path.size());
             System.out.println("Path length (number of vertices, including start and end) should be 7.");
             return false;
         }
         if (shortest.costGraph.computePathCost(path) != 8) {
+            System.out.println(path);
+            System.out.println("path cost is: " + shortest.costGraph.computePathCost(path));
             System.out.println("Path cost should be 8.");
             return false;
         }

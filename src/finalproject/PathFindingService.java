@@ -107,11 +107,10 @@ public abstract class PathFindingService {
         return path;
     }
 
-    //TODO level 5: Implement basic dijkstra's algorithm to find path to the final destination passing through given waypoints
     public ArrayList<Tile> findPath(Tile start, LinkedList<Tile> waypoints) {
         ArrayList<Tile> completePath = new ArrayList<>();
     
-        if (waypoints.size() == 0 || waypoints == null) findPath(start);
+        if (waypoints.size() == 0) findPath(start);
         
         else {
             System.out.println("\nstart is " + start);

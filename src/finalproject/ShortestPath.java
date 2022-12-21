@@ -15,8 +15,6 @@ public class ShortestPath extends PathFindingService {
 	@Override
 	public void generateGraph() {
         for (var vertex : g.verticesList) {
-            System.out.println(vertex);
-            
             for (var neigh : vertex.neighbors) {
                 if (neigh instanceof MetroTile && vertex instanceof MetroTile) {
                     ((MetroTile) neigh).fixMetro(vertex);
